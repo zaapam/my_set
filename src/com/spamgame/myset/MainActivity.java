@@ -1,6 +1,9 @@
 package com.spamgame.myset;
 
+import com.spamgame.myset.data.TabsPagerAdapter;
+
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,10 +15,30 @@ import android.app.FragmentTransaction;
 
 public class MainActivity extends FragmentActivity implements TabListener {
 
+	private ViewPager viewPager;
+	private TabsPagerAdapter adapter;
+	private ActionBar actionBar;
+	private String[] tabs = { "Favourite", "Thai Index" };
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// init
+		viewPager = (ViewPager)findViewById(R.id.pager);
+		actionBar = getActionBar();
+		adapter = new TabsPagerAdapter(getSupportFragmentManager());
+		
+		viewPager.setAdapter(adapter);
+		viewPager.setOffscreenPageLimit(2);
+		actionBar.setHomeButtonEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
+		// Adding Tabs
+		for(String str : tabs) {
+			actionBar.addTab(actionBar.newTab().setText(str).setTabListener(this));
+		}
 	}
 
 	@Override
@@ -46,7 +69,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		
+		viewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
