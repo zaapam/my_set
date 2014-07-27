@@ -1,9 +1,10 @@
 package com.spamgame.myset;
 
-import com.spamgame.myset.data.TabsPagerAdapter;
+import com.spamgame.myset.adapter.TabsPagerAdapter;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,7 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 
-public class MainActivity extends FragmentActivity implements TabListener {
+public class MainActivity extends FragmentActivity implements TabListener,OnPageChangeListener {
 
 	private ViewPager viewPager;
 	private TabsPagerAdapter adapter;
@@ -32,6 +33,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		
 		viewPager.setAdapter(adapter);
 		viewPager.setOffscreenPageLimit(2);
+		viewPager.setOnPageChangeListener(this);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
@@ -76,5 +78,23 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		// TODO Auto-generated method stub
+		actionBar.setSelectedNavigationItem(arg0);
 	}
 }

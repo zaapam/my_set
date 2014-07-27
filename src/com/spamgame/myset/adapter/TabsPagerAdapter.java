@@ -1,4 +1,4 @@
-package com.spamgame.myset.data;
+package com.spamgame.myset.adapter;
 
 import com.spamgame.myset.FavouriteFragment;
 import com.spamgame.myset.SETIndexFragment;

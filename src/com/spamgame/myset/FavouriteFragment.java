@@ -1,5 +1,7 @@
 package com.spamgame.myset;
 
+import com.spamgame.myset.adapter.FavouriteAdapter;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -16,7 +18,8 @@ public class FavouriteFragment extends ListFragment {
 		View rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
 		
 		String[] values = new String[]{ "Message1", "Message2", "Message3" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
+		FavouriteAdapter adapter = new FavouriteAdapter(getActivity(), values);
 		setListAdapter(adapter);
 		
 		return rootView;
