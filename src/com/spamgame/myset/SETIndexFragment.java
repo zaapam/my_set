@@ -12,7 +12,7 @@ public class SETIndexFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.fragment_setindex, container);
+		View rootView = inflater.inflate(R.layout.fragment_setindex, container, false);
 		
 		return rootView;
 	}
