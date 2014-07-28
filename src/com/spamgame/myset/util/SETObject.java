@@ -3,11 +3,11 @@ package com.spamgame.myset.util;
 public class SETObject {
 
 	private String code;
-	private float price;
-	private float priceChange;
-	private float priceChangePercent;
+	private double price;
+	private double priceChange;
+	private double priceChangePercent;
 	
-	public SETObject(String code, float price, float priceChange, float priceChangePercent) {
+	public SETObject(String code, double price, double priceChange, double priceChangePercent) {
 		this.code = code;
 		this.price = price;
 		this.priceChange = priceChange;
@@ -22,7 +22,7 @@ public class SETObject {
 		this.code = code;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -30,7 +30,7 @@ public class SETObject {
 		this.price = price;
 	}
 
-	public float getPriceChange() {
+	public double getPriceChange() {
 		return priceChange;
 	}
 
@@ -38,7 +38,7 @@ public class SETObject {
 		this.priceChange = priceChange;
 	}
 
-	public float getPriceChangePercent() {
+	public double getPriceChangePercent() {
 		return priceChangePercent;
 	}
 

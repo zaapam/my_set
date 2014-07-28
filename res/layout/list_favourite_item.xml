@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp" >
 
     <TextView
         android:id="@+id/text_favourite_code"
@@ -10,7 +12,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
         android:text="TextView"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -24,7 +25,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
         android:text="TextView"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -35,18 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_favourite_code"
         android:layout_below="@+id/text_favourite_value"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="เปลี่ยนแปลง" />
-
-    <TextView
-        android:id="@+id/text_static_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_static_1"
-        android:layout_alignBottom="@+id/text_static_1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:text="% เปลี่ยนแปลง" />
 
     <TextView
         android:id="@+id/text_favourite_change_value"
@@ -60,12 +50,20 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/text_static_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_favourite_change_value"
+        android:layout_alignRight="@+id/text_favourite_value"
+        android:text="% เปลี่ยนแปลง" />
+
+    <TextView
         android:id="@+id/text_favourite_change_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/text_favourite_change_value"
         android:layout_alignBottom="@+id/text_favourite_change_value"
-        android:layout_alignLeft="@+id/text_static_2"
+        android:layout_alignRight="@+id/text_static_2"
         android:text="TextView"
         android:textSize="20dp"
         android:textStyle="bold" />
