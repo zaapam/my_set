@@ -1,63 +1,111 @@
-apply plugin: 'android-library'
-
 buildscript {
     repositories {
-        jcenter()
-
+        mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-ext {
-    isLibrary = true
-    pomPackaging = "aar"
-    pomArtifactId = "PullToRefresh-ListView"
-    pomName = "Android 'Pull to Refresh' ListView library"
-    pomDescription = 'A generic, customizable, open source Android ListView implementation that has "Pull to Refresh" functionality. This ListView can be used as a replacement of the normal Android android.widget.ListView class.'
-}
-
-
-android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
-
-    defaultConfig {
-        minSdkVersion 4
-        targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
+allprojects {
+    repositories {
+        mavenCentral()
     }
 
-    lintOptions {
-      abortOnError false
-    }
+    ext {
+        isLibrary = false
 
-    sourceSets {
-      main {
-        manifest.srcFile 'AndroidManifest.xml'
-          java.srcDirs = ['src']
-          res.srcDirs = ['res']
-      }
-    }
-
-    buildTypes {
-      release {
-        runProguard true
-          proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-      }
+        // Fill out the proper values here and uncomment.
+        // See also https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+        // Upload it with: gradle uploadArchives
+        // sonatypeUsername = 'yourusername'
+        // sonatypePassword = 'yourpassword'
+        // sonatypeRepo = 'the-repo'
+        // sonatypeSnapshotRepo = 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
+subprojects {
+    afterEvaluate { Project project ->
+        ext.pluginContainer = project.getPlugins()
+        if(ext.pluginContainer.hasPlugin("android") || ext.pluginContainer.hasPlugin("android-library")) {
+            android {
+                compileSdkVersion 19
+                buildToolsVersion '19.1.0'
 
-dependencies {
-}
+                android {
+                    lintOptions {
+                        abortOnError false
+                    }
+                }
 
+                defaultConfig {
+                    minSdkVersion 4
+                    targetSdkVersion 19
+                    versionCode 1
+                    versionName "1.0"
+                }
+            }
+        }
+        if(project.isLibrary && rootProject.hasProperty('sonatypeUsername') && rootProject.hasProperty('sonatypePassword')) {
+            configure(project) {
+                apply plugin: 'maven'
+                apply plugin: 'signing'
+
+                signing {
+                    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+                    sign configurations.archives
+                }
+
+                uploadArchives {
+                    repositories.mavenDeployer {
+                        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                        repository(url: sonatypeRepo) {
+                            authentication(userName: sonatypeUsername , password: sonatypePassword)
+                            releases(updatePolicy: 'always')
+                        }
+
+                        snapshotRepository(url: sonatypeSnapshotRepo) {
+                            authentication(userName: sonatypeUsername , password: sonatypePassword)
+                            snapshots(updatePolicy: 'always')
+                        }
+
+                        pom.project {
+                            name project.pomName
+                            version project.version
+                            groupId project.group
+                            packaging project.pomPackaging
+                            artifactId project.pomArtifactId
+                            description project.pomDescription
+                            url 'https://github.com/erikwt/PullToRefresh-ListView'
+
+                            scm {
+                                url 'scm:git@github.com:erikwt/PullToRefresh-ListView.git'
+                                connection 'scm:git@github.com:erikwt/PullToRefresh-ListView.git'
+                                developerConnection 'scm:git@github.com:erikwt/PullToRefresh-ListView.git'
+                            }
+
+                            licenses {
+                                license {
+                                    name 'The Apache Software License, Version 2.0'
+                                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                                    distribution 'repo'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id 'erikwt'
+                                    name 'Erik Wallentinsen'
+                                    email ''
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
