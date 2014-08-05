@@ -2,7 +2,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <ListView
+    <eu.erikw.PullToRefreshListView
         android:id="@+id/favourite_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,24 +14,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:background="@color/white"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/button1"
-            android:layout_toRightOf="@+id/static_text_3" >
-	 
-	        <requestFocus />
- 
+      	<EditText
+      	    android:id="@+id/edit_add_favourite"
+      	    android:layout_width="fill_parent"
+      	    android:layout_height="wrap_content"
+      	    android:layout_toLeftOf="@+id/btn_add_favourite"
+      	    android:layout_toRightOf="@+id/static_text_3" >
+
     	</EditText>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btn_add_favourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/editText"

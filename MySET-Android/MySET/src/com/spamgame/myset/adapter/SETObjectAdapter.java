@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class FavouriteAdapter extends BaseAdapter {
+public class SETObjectAdapter extends BaseAdapter {
 
 	private Context context;
 	private int layout;
@@ -22,7 +22,7 @@ public class FavouriteAdapter extends BaseAdapter {
 	private ArrayList<SETObject> data;
 	private FavouriteItemViewHolder viewHolder;
 	
-	public FavouriteAdapter(Context context, ArrayList<SETObject> values) {
+	public SETObjectAdapter(Context context, ArrayList<SETObject> values) {
 		//super(context, android.R.layout.simple_list_item_1);
 		
 		this.context = context;
