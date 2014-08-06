@@ -30,7 +30,7 @@
             android:name=".SETIndexFragment"
             android:label="@string/title_activity_setindex_fragment" >
         </activity>
-        <receiver android:name="MySETWidgetProvider" >
+        <receiver android:name="com.spamgame.myset.widget.MySETWidgetProvider" >
             <intent-filter >
                 <action 
                     android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -40,6 +40,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+        
+        <service
+		   android:name=".WidgetService"
+		   android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
