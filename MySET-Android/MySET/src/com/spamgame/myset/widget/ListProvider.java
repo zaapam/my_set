@@ -3,6 +3,8 @@ package com.spamgame.myset.widget;
 import java.util.ArrayList;
 
 import com.spamgame.myset.R;
+import com.spamgame.myset.util.SETFormat;
+import com.spamgame.myset.util.SETObject;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -12,7 +14,7 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 
 public class ListProvider implements RemoteViewsFactory {
 
-	private ArrayList<ListItem> listItemList = new ArrayList();
+	private ArrayList<SETObject> data = new ArrayList<SETObject>();
 	private Context context = null;
 	private int appWidgetId;
 	
@@ -23,25 +25,23 @@ public class ListProvider implements RemoteViewsFactory {
 		populateListItem();
 	}
 	
-	private void populateListItem() {
-		for (int i = 0; i < 10; i++) {
-			ListItem listItem = new ListItem();
-			listItem.heading = "Heading" + i;
-			listItem.content = i + " This is the content of the app widget listview.Nice content though";
-			listItemList.add(listItem);
-		}
+	private void populateListItem() {		
+		data.add(new SETObject("BLAND", 2.18, 0.6, 2.13));
+		data.add(new SETObject("BLAND-W3", 0.73, 0.6, 10.57));
+		data.add(new SETObject("TRUE", 12.30, 0.8, 4.57));
+		data.add(new SETObject("EFORL", 1.41, -0.6, -5.28));
 	}
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return listItemList.size();
+		return data.size();
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return arg0;
 	}
 
 	@Override
@@ -53,11 +53,14 @@ public class ListProvider implements RemoteViewsFactory {
 	@Override
 	public RemoteViews getViewAt(int position) {
 		// TODO Auto-generated method stub
-		final RemoteViews remoteView = new RemoteViews(
-		context.getPackageName(), R.layout.widget_list_row);
-		ListItem listItem = listItemList.get(position);
-		remoteView.setTextViewText(R.id.heading, listItem.heading);
-		remoteView.setTextViewText(R.id.content, listItem.content);
+		final RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_list_row);
+		SETObject item = data.get(position);
+		remoteView.setTextViewText(R.id.widget_symbol, item.getCode());
+		remoteView.setTextViewText(R.id.widget_value, SETFormat.toString(item.getPrice()));
+		//remoteView.setTextViewText(R.id.widget_value_change, SETFormat.toString(item.getPriceChange()));
+		
+		remoteView.setTextColor(R.id.widget_value, SETFormat.getColor(item.getPrice()));
+		//remoteView.setTextColor(R.id.widget_value_change, SETFormat.getColor(item.getPriceChange()));
 				 
 		return remoteView;
 	}
@@ -65,7 +68,7 @@ public class ListProvider implements RemoteViewsFactory {
 	@Override
 	public int getViewTypeCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override

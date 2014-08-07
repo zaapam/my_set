@@ -6,6 +6,13 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_favourite">FavouriteActivity</string>
     <string name="title_activity_setindex_fragment">SETIndexFragment</string>
+    <string name="text_change">เปลี่ยนแปลง</string>
+    <string name="widget_empty">No Data</string>
+    
     <color name="white">#FFFFFF</color>
+    <color name="color_change_green">#04B431</color>
+    <color name="color_change_red">#FE2E2E</color>
+    <color name="color_change_yellow">#D7DF01</color>
+    
 
 </resources>
